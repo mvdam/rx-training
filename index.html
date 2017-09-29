@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>RxJS exercise</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/rxjs@5.4.0/bundles/Rx.min.js"></script>
+  <script>
+    /**
+     * Exercise: make an Observable that emits the first 3 clicks as "CLICK",
+     * then the next 3 clicks as "click", then completes.
+     */
+
+    const lowercaseClicks = Rx.Observable.fromEvent(document, "click")
+        .map((event, i) => i < 3 ? 'click' : 'CLICK')
+        .take(6)
+        //.subscribe(console.log)
+
+
+    const lower = Rx.Observable.fromEvent(document, "click")
+        .map(e => 'click')
+        .take(3)
+
+    const upper = Rx.Observable.fromEvent(document, "click")
+        .map(e => 'CLICK')
+        .take(3)
+
+    const obs = Rx.Observable.concat(lower, upper)
+        .subscribe(console.log)
+
+
+  </script>
+</body>
+
+</html>
